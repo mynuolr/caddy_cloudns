@@ -1,8 +1,10 @@
 package caddy_cloudns
 
 import (
+	"context"
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
+	"github.com/libdns/libdns"
 	"github.com/mynuolr/cloudns"
 )
 
@@ -77,7 +79,14 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 
 	return nil
 }
-
+func (p *Provider)AppendRecords(ctx context.Context, zone string, recs []libdns.Record) ([]libdns.Record, error){
+	caddy.Log().Info(zone)
+	return p.Provider.AppendRecords(ctx,zone,recs)
+}
+func (p *Provider)DeleteRecords(ctx context.Context, zone string, records []libdns.Record) ([]libdns.Record, error) {
+	caddy.Log().Info(zone)
+	return p.Provider.DeleteRecords(ctx,zone,records)
+}
 // Interface guards
 var (
 	_ caddyfile.Unmarshaler = (*Provider)(nil)
