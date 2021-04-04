@@ -56,7 +56,7 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 				}
 			case "auth_password":
 				if d.NextArg() {
-					p.Provider.AuthId = d.Val()
+					p.Provider.AuthPassword = d.Val()
 				}
 				if d.NextArg() {
 					return d.ArgErr()
