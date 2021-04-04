@@ -92,3 +92,4 @@ var (
 	_ caddyfile.Unmarshaler = (*Provider)(nil)
 	_ caddy.Provisioner     = (*Provider)(nil)
 )
+
