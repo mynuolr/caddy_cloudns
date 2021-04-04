@@ -24,9 +24,10 @@ func (Provider) CaddyModule() caddy.ModuleInfo {
 // TODO: This is just an example. Useful to allow env variable placeholders; update accordingly.
 // Provision sets up the module. Implements caddy.Provisioner.
 func (p *Provider) Provision(ctx caddy.Context) error {
-	p.Provider.AuthPassword = caddy.NewReplacer().ReplaceAll(p.Provider.AuthPassword, "")
-	p.Provider.AuthId = caddy.NewReplacer().ReplaceAll(p.Provider.AuthId, "")
-	p.Provider.Sub = caddy.NewReplacer().ReplaceAll(p.Provider.AuthPassword, "false")
+	repl := caddy.NewReplacer()
+	p.Provider.AuthPassword = repl.ReplaceAll(p.Provider.AuthPassword, "")
+	p.Provider.AuthId = repl.ReplaceAll(p.Provider.AuthId, "")
+	p.Provider.Sub = repl.ReplaceAll(p.Provider.Sub, "")
 	return nil
 }
 
